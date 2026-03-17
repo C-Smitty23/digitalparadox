@@ -179,6 +179,40 @@
 
     /* FOOTER */
     footer { background: var(--ink); color: #5a5a50; text-align: center; padding: 28px 20px; font-size: 0.78rem; line-height: 1.8; }
+    /* QUIZ */
+    .quiz-card { background: var(--white); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; }
+    .q-block { padding: 28px 32px; border-bottom: 1px solid var(--rule); }
+    .q-block:last-of-type { border-bottom: none; }
+    .q-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; color: var(--green); margin-bottom: 10px; }
+    .q-text { font-family: var(--serif); font-size: 1.05rem; font-weight: 700; line-height: 1.4; margin-bottom: 16px; color: var(--ink); }
+    .q-options { display: flex; flex-direction: column; gap: 8px; }
+    .q-opt { display: flex; align-items: flex-start; gap: 10px; padding: 10px 14px; border: 1px solid var(--rule); border-radius: 5px; cursor: pointer; font-size: 0.9rem; color: var(--ink-light); line-height: 1.5; transition: background 0.15s, border-color 0.15s; }
+    .q-opt:hover { background: var(--green-light); border-color: var(--green-mid); }
+    .q-opt input[type="radio"] { margin-top: 3px; accent-color: var(--green); flex-shrink: 0; }
+    .q-opt:has(input:checked) { background: var(--green-light); border-color: var(--green); color: var(--ink); }
+    .q-submit-row { padding: 24px 32px; display: flex; align-items: center; gap: 16px; background: var(--bg); border-top: 1px solid var(--rule); }
+    .q-submit-btn { background: var(--ink); color: var(--white); border: none; font-family: var(--sans); font-size: 0.88rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 12px 28px; border-radius: 4px; cursor: pointer; transition: background 0.15s; }
+    .q-submit-btn:hover { background: var(--green); }
+    .q-error { font-size: 0.82rem; color: #c0392b; font-style: italic; }
+    .q-retake-btn { background: none; border: 1px solid var(--rule); color: var(--ink-light); font-family: var(--sans); font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 10px 22px; border-radius: 4px; cursor: pointer; margin: 0 32px 28px; transition: border-color 0.15s, color 0.15s; }
+    .q-retake-btn:hover { border-color: var(--green); color: var(--green); }
+    /* Results */
+    .result-header { background: var(--ink); color: var(--white); padding: 32px; }
+    .result-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--green-mid); font-weight: 700; margin-bottom: 10px; }
+    .result-level { font-family: var(--serif); font-size: 2rem; font-weight: 900; margin-bottom: 8px; }
+    .result-score-line { font-size: 0.88rem; color: #7a7a6e; }
+    .result-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); }
+    @media (max-width: 600px) { .result-grid { grid-template-columns: 1fr; } }
+    .result-block { background: var(--white); padding: 24px 28px; }
+    .rb-title { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: var(--green); margin-bottom: 10px; }
+    .rb-bar-wrap { background: var(--bg); border-radius: 4px; height: 8px; margin-bottom: 12px; overflow: hidden; }
+    .rb-bar { height: 100%; border-radius: 4px; background: var(--green); width: 0%; transition: width 0.8s ease; }
+    .rb-text { font-size: 0.87rem; color: var(--ink-light); line-height: 1.7; }
+    .result-tips { padding: 28px 32px; border-top: 1px solid var(--rule); }
+    .rt-title { font-family: var(--serif); font-size: 1.1rem; font-weight: 700; margin-bottom: 16px; }
+    .rt-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .rt-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 0.9rem; color: var(--ink-light); line-height: 1.65; }
+    .rt-list li::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; margin-top: 7px; }
   </style>
 </head>
 <body>
@@ -200,7 +234,7 @@
 <div id="home" class="page active">
   <div class="hero">
     <div class="hero-inner">
-      <div class="hero-label">A Student Research Project By Colin Smith</div>
+      <div class="hero-label">A Student Research Project &nbsp;&bull;&nbsp; Digital Consulting</div>
       <h1>You were not <span>distracted.</span><br>You were designed to be.</h1>
       <p class="hero-desc">Social media platforms are not neutral tools. They are engineered environments built to capture your attention and hold it. This site takes an honest, research-backed look at what that actually means for your brain, your thinking, and your future.</p>
       <div class="stat-strip">
@@ -220,33 +254,10 @@
     </div>
   </div>
 
+  <!-- CAROUSEL (moved up) -->
   <div class="section">
-    <div class="section-label">Our Mission</div>
-    <p class="section-heading">I'm not here to tell you to <em>put your phone down.</em></p>
-    <p class="body-text">We are here to help you understand the mechanics behind your habits, the neuroscience, the algorithm design, the business models, and give you concrete tools to engage with technology on your own terms. Think of this as a briefing, not a lecture.</p>
-    <hr class="ruled"/>
-    <div class="page-cards">
-      <button class="page-card" onclick="go('rewired')">
-        <div class="pc-num">Section 02</div>
-        <h3>Mind &amp; Health</h3>
-        <p>How dopamine loops, sleep disruption, and social comparison alter the teenage brain.</p>
-      </button>
-      <button class="page-card" onclick="go('seethrough')">
-        <div class="pc-num">Section 03</div>
-        <h3>Algorithms &amp; Truth</h3>
-        <p>Algorithms, echo chambers, and how to identify misinformation in your feed.</p>
-      </button>
-      <button class="page-card" onclick="go('levelup')">
-        <div class="pc-num">Section 04</div>
-        <h3>Tools &amp; Habits</h3>
-        <p>Tools, strategies, and habits for using the internet as a genuine learning machine.</p>
-      </button>
-    </div>
-  </div>
-
-  <div class="section" style="padding-top:0">
     <div class="section-label">Expectation vs. Reality</div>
-    <p class="section-heading">What social media <em>promises</em> and what it delivers</p>
+    <p class="section-heading">What social media <em>promises</em>, and what it delivers</p>
     <div class="carousel-outer">
       <div class="carousel-header">
         <h3>Four comparisons worth reading</h3>
@@ -318,6 +329,32 @@
       </div>
     </div>
   </div>
+
+  <!-- MISSION + PAGE CARDS -->
+  <div class="section" style="padding-top:0">
+    <div class="section-label">Our Mission</div>
+    <p class="section-heading">We are not here to tell you to <em>put your phone down.</em></p>
+    <p class="body-text">We are here to help you understand the mechanics behind your habits, the neuroscience, the algorithm design, the business models, and give you concrete tools to engage with technology on your own terms. Think of this as a briefing, not a lecture.</p>
+    <hr class="ruled"/>
+    <div class="page-cards">
+      <button class="page-card" onclick="go('rewired')">
+        <div class="pc-num">Section 02</div>
+        <h3>Mind &amp; Health</h3>
+        <p>How dopamine loops, sleep disruption, and social comparison alter the teenage brain.</p>
+      </button>
+      <button class="page-card" onclick="go('seethrough')">
+        <div class="pc-num">Section 03</div>
+        <h3>Algorithms &amp; Truth</h3>
+        <p>Algorithms, echo chambers, and how to identify misinformation in your feed.</p>
+      </button>
+      <button class="page-card" onclick="go('levelup')">
+        <div class="pc-num">Section 04</div>
+        <h3>Tools &amp; Habits</h3>
+        <p>Tools, strategies, and habits for using the internet as a genuine learning machine.</p>
+      </button>
+    </div>
+  </div>
+
 </div>
 
 
@@ -363,16 +400,146 @@
   </div>
 
   <div class="section" style="padding-top:0">
-    <div class="form-block">
-      <div class="form-header">
-        <h3>Screen Time Survey, Add Your Data</h3>
-        <p>Anonymous. Takes about 90 seconds. Your responses helps build a real picture of student habits.</p>
+    <div class="section-label">Self-Assessment</div>
+    <p class="section-heading">How does your screen time <em>actually</em> affect you?</p>
+    <p class="body-text" style="margin-bottom:32px">Answer eight quick questions honestly. You will get a personalized breakdown of your habits, what they mean, and what you can do about them.</p>
+
+    <div id="quiz-wrap">
+      <div class="quiz-card" id="quiz-form">
+
+        <div class="q-block" id="q1">
+          <div class="q-label">Question 1 of 8</div>
+          <div class="q-text">On a typical day, how many hours do you spend on social media?</div>
+          <div class="q-options">
+            <label class="q-opt"><input type="radio" name="q1" value="0"> Less than 1 hour</label>
+            <label class="q-opt"><input type="radio" name="q1" value="1"> 1 to 2 hours</label>
+            <label class="q-opt"><input type="radio" name="q1" value="2"> 2 to 4 hours</label>
+            <label class="q-opt"><input type="radio" name="q1" value="3"> 4 to 6 hours</label>
+            <label class="q-opt"><input type="radio" name="q1" value="4"> More than 6 hours</label>
+          </div>
+        </div>
+
+        <div class="q-block" id="q2">
+          <div class="q-label">Question 2 of 8</div>
+          <div class="q-text">What is usually the first thing you do when you wake up?</div>
+          <div class="q-options">
+            <label class="q-opt"><input type="radio" name="q2" value="0"> Get up, eat, or do something offline</label>
+            <label class="q-opt"><input type="radio" name="q2" value="1"> Check messages but put my phone away quickly</label>
+            <label class="q-opt"><input type="radio" name="q2" value="2"> Scroll for a while before getting up</label>
+            <label class="q-opt"><input type="radio" name="q2" value="3"> My phone is the first thing I reach for every morning</label>
+          </div>
+        </div>
+
+        <div class="q-block" id="q3">
+          <div class="q-label">Question 3 of 8</div>
+          <div class="q-text">How do you feel when you go a full day without social media?</div>
+          <div class="q-options">
+            <label class="q-opt"><input type="radio" name="q3" value="0"> Fine, sometimes even better</label>
+            <label class="q-opt"><input type="radio" name="q3" value="1"> A little restless but I manage</label>
+            <label class="q-opt"><input type="radio" name="q3" value="2"> Anxious or like I am missing something</label>
+            <label class="q-opt"><input type="radio" name="q3" value="3"> I try to avoid this situation entirely</label>
+          </div>
+        </div>
+
+        <div class="q-block" id="q4">
+          <div class="q-label">Question 4 of 8</div>
+          <div class="q-text">How often do you use your phone within 30 minutes of going to sleep?</div>
+          <div class="q-options">
+            <label class="q-opt"><input type="radio" name="q4" value="0"> Rarely or never</label>
+            <label class="q-opt"><input type="radio" name="q4" value="1"> A few times a week</label>
+            <label class="q-opt"><input type="radio" name="q4" value="2"> Most nights</label>
+            <label class="q-opt"><input type="radio" name="q4" value="3"> Every night without exception</label>
+          </div>
+        </div>
+
+        <div class="q-block" id="q5">
+          <div class="q-label">Question 5 of 8</div>
+          <div class="q-text">When you sit down to study or do homework, how long before you check your phone?</div>
+          <div class="q-options">
+            <label class="q-opt"><input type="radio" name="q5" value="0"> I keep it away and rarely think about it</label>
+            <label class="q-opt"><input type="radio" name="q5" value="1"> After 30 or more minutes</label>
+            <label class="q-opt"><input type="radio" name="q5" value="2"> Within 10 to 20 minutes</label>
+            <label class="q-opt"><input type="radio" name="q5" value="3"> Almost immediately</label>
+          </div>
+        </div>
+
+        <div class="q-block" id="q6">
+          <div class="q-label">Question 6 of 8</div>
+          <div class="q-text">How would you describe most of your social media use?</div>
+          <div class="q-options">
+            <label class="q-opt"><input type="radio" name="q6" value="0"> I use it with a purpose, like learning or keeping up with specific people</label>
+            <label class="q-opt"><input type="radio" name="q6" value="1"> Mostly purposeful but I drift sometimes</label>
+            <label class="q-opt"><input type="radio" name="q6" value="2"> Mostly passive scrolling with no real goal</label>
+            <label class="q-opt"><input type="radio" name="q6" value="3"> I open apps out of habit and barely notice I am doing it</label>
+          </div>
+        </div>
+
+        <div class="q-block" id="q7">
+          <div class="q-label">Question 7 of 8</div>
+          <div class="q-text">After spending time on social media, how do you usually feel?</div>
+          <div class="q-options">
+            <label class="q-opt"><input type="radio" name="q7" value="0"> Good, informed, or inspired</label>
+            <label class="q-opt"><input type="radio" name="q7" value="1"> Neutral, about the same as before</label>
+            <label class="q-opt"><input type="radio" name="q7" value="2"> Tired or a little drained</label>
+            <label class="q-opt"><input type="radio" name="q7" value="3"> Worse about myself or anxious</label>
+          </div>
+        </div>
+
+        <div class="q-block" id="q8">
+          <div class="q-label">Question 8 of 8</div>
+          <div class="q-text">Have you ever tried to cut back on social media and found it harder than expected?</div>
+          <div class="q-options">
+            <label class="q-opt"><input type="radio" name="q8" value="0"> No, I cut back easily when I want to</label>
+            <label class="q-opt"><input type="radio" name="q8" value="1"> A little, but I managed</label>
+            <label class="q-opt"><input type="radio" name="q8" value="2"> Yes, I kept going back without meaning to</label>
+            <label class="q-opt"><input type="radio" name="q8" value="3"> I have not really tried because I do not think I could</label>
+          </div>
+        </div>
+
+        <div class="q-submit-row">
+          <button class="q-submit-btn" onclick="runQuiz()">See My Results</button>
+          <span class="q-error" id="q-error"></span>
+        </div>
       </div>
-      <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdDbbrbSSVOufhHwfSQRt4GiI4qWEjaf6aJo3Ye5P_J3e8v4A/viewform?embedded=true" title="Screen Time Survey - anonymous form about daily social media usage habits" aria-label="Embedded Google Form: Anonymous screen time survey for students">Loading&hellip;</iframe>
+
+      <!-- RESULTS -->
+      <div class="quiz-card" id="quiz-results" style="display:none">
+        <div class="result-header">
+          <div class="result-label">Your Results</div>
+          <div class="result-level" id="res-level"></div>
+          <div class="result-score-line" id="res-score-line"></div>
+        </div>
+        <div class="result-grid">
+          <div class="result-block">
+            <div class="rb-title">Dependency Level</div>
+            <div class="rb-bar-wrap"><div class="rb-bar" id="bar-addiction"></div></div>
+            <div class="rb-text" id="text-addiction"></div>
+          </div>
+          <div class="result-block">
+            <div class="rb-title">Sleep Impact</div>
+            <div class="rb-bar-wrap"><div class="rb-bar" id="bar-sleep"></div></div>
+            <div class="rb-text" id="text-sleep"></div>
+          </div>
+          <div class="result-block">
+            <div class="rb-title">Focus &amp; Attention</div>
+            <div class="rb-bar-wrap"><div class="rb-bar" id="bar-focus"></div></div>
+            <div class="rb-text" id="text-focus"></div>
+          </div>
+          <div class="result-block">
+            <div class="rb-title">Mood &amp; Wellbeing</div>
+            <div class="rb-bar-wrap"><div class="rb-bar" id="bar-mood"></div></div>
+            <div class="rb-text" id="text-mood"></div>
+          </div>
+        </div>
+        <div class="result-tips">
+          <div class="rt-title">What you can do</div>
+          <ul class="rt-list" id="res-tips"></ul>
+        </div>
+        <button class="q-retake-btn" onclick="retakeQuiz()">Retake the Quiz</button>
+      </div>
     </div>
 
-
-    <div class="video-block">
+    <div class="video-block" style="margin-top:28px">
       <div class="video-label">
         <h3>How a Handful of Tech Companies Control Billions of Minds, Tristan Harris, TED Talk</h3>
         <p>Former Google design ethicist Tristan Harris on how social platforms are engineered to hijack your attention. (~17 min)</p>
@@ -590,7 +757,8 @@
 
 
 <footer>
-  <p>The Digital Paradox &nbsp;&bull;&nbsp; A Student Research Project</p>
+  <p>The Digital Paradox &nbsp;&bull;&nbsp; A Student Research Project &nbsp;&bull;&nbsp; 2024&ndash;2025</p>
+  <p style="margin-top:4px">Sources: Common Sense Media &bull; NIH &bull; JAMA Pediatrics &bull; MIT Media Lab &bull; American Academy of Sleep Medicine &bull; University of Texas at Austin</p>
   <p style="margin-top:10px; color:#3a3a32">By Colin Smith</p>
 </footer>
 
@@ -603,6 +771,151 @@
     const ids = ['home','rewired','seethrough','levelup'];
     document.querySelectorAll('.nav-link')[ids.indexOf(id)].classList.add('active');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function runQuiz() {
+    const answers = {};
+    for (let i = 1; i <= 8; i++) {
+      const sel = document.querySelector(`input[name="q${i}"]:checked`);
+      if (!sel) {
+        document.getElementById('q-error').textContent = `Please answer question ${i} before continuing.`;
+        document.getElementById(`q${i}`).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      answers[`q${i}`] = parseInt(sel.value);
+    }
+    document.getElementById('q-error').textContent = '';
+
+    // Score categories
+    const screenTime = answers.q1;        // q1: overall time
+    const morning    = answers.q2;        // q2: first thing morning
+    const fomo       = answers.q3;        // q3: anxiety without phone
+    const sleep      = answers.q4;        // q4: phone before bed
+    const focus      = answers.q5;        // q5: distraction while studying
+    const passive    = answers.q6;        // q6: passive vs active use
+    const mood       = answers.q7;        // q7: how you feel after
+    const control    = answers.q8;        // q8: ability to cut back
+
+    const total = screenTime + morning + fomo + sleep + focus + passive + mood + control;
+    const maxScore = 8 * 3; // max 24
+    const pct = Math.round((total / maxScore) * 100);
+
+    // Addiction/dependency score (0-100)
+    const depScore = Math.round(((screenTime + morning + fomo + control) / 12) * 100);
+    // Sleep score
+    const sleepScore = Math.round(((sleep + screenTime) / 7) * 100);
+    // Focus score
+    const focusScore = Math.round(((focus + passive) / 6) * 100);
+    // Mood score
+    const moodScore = Math.round(((mood + fomo) / 6) * 100);
+
+    let level, scoreLine, levelColor;
+    if (pct <= 25) {
+      level = 'Healthy Relationship'; levelColor = '#2d7a47';
+      scoreLine = 'Your habits are well-balanced. Social media is a tool you use, not one that uses you.';
+    } else if (pct <= 50) {
+      level = 'Moderate Use'; levelColor = '#d97706';
+      scoreLine = 'Some patterns worth watching. A few targeted changes could make a real difference.';
+    } else if (pct <= 75) {
+      level = 'Heavy Use'; levelColor = '#c2410c';
+      scoreLine = 'Social media is taking up significant mental and physical space in your daily life.';
+    } else {
+      level = 'High Dependency'; levelColor = '#991b1b';
+      scoreLine = 'Your habits are having a meaningful negative impact on sleep, focus, and wellbeing.';
+    }
+
+    // Dependency text
+    let depText, sleepText, focusText, moodText;
+    if (depScore <= 25) depText = 'You have strong control over your usage. You open apps with intention and find it easy to step away.';
+    else if (depScore <= 50) depText = 'Some habitual checking, but you can generally put the phone down when needed. Worth monitoring.';
+    else if (depScore <= 75) depText = 'Your usage shows signs of compulsive behavior. You likely open apps out of reflex rather than choice.';
+    else depText = 'Strong dependency indicators. The anxiety you feel without your phone, and difficulty cutting back, are significant signals.';
+
+    if (sleepScore <= 25) sleepText = 'Your sleep hygiene looks solid. Keeping screens out of the bedroom is one of the highest-impact habits you can maintain.';
+    else if (sleepScore <= 50) sleepText = 'Occasional late-night use. Even a few nights a week of phone-before-bed disrupts your sleep cycle more than most people realize.';
+    else if (sleepScore <= 75) sleepText = 'Regular screen use before bed is likely reducing your sleep quality and next-day memory and focus. This is one of the easier things to fix.';
+    else sleepText = 'Your phone is actively harming your sleep every night. This compounds over time and affects mood, grades, and physical health.';
+
+    if (focusScore <= 25) focusText = 'Your ability to focus is intact. You treat your study time as protected and that pays off in real cognitive performance.';
+    else if (focusScore <= 50) focusText = 'Some distraction patterns, but manageable. Putting your phone in another room during study time would likely improve your output noticeably.';
+    else if (focusScore <= 75) focusText = 'Frequent interruptions are fragmenting your focus. Every time you check your phone mid-task, it takes an average of 23 minutes to fully refocus.';
+    else focusText = 'Your phone is competing with almost everything else you do. Deep focus is very hard to achieve under these conditions.';
+
+    if (moodScore <= 25) moodText = 'Social media is not weighing heavily on your emotional state. You are using it in a way that leaves you feeling neutral or positive.';
+    else if (moodScore <= 50) moodText = 'Some emotional cost, but within a manageable range. Notice what content or platforms consistently leave you feeling worse.';
+    else if (moodScore <= 75) moodText = 'You are regularly feeling worse after using social media. This is a pattern worth taking seriously, not just accepting as normal.';
+    else moodText = 'Strong signs that social media is actively harming your emotional wellbeing. Anxiety without your phone combined with feeling worse after using it is a significant pattern.';
+
+    // Tips
+    const tips = [];
+    if (sleepScore > 40) tips.push('Set a hard cutoff: no phone 45 minutes before bed. Charge it outside your bedroom. Even one week of this will noticeably improve how rested you feel.');
+    if (focusScore > 40) tips.push('Before starting homework, physically put your phone in another room. Research from UT Austin shows that having it on your desk, even face down, reduces your available brainpower.');
+    if (depScore > 40) tips.push('Instead of setting time limits (which are easy to ignore), designate specific scroll windows during the day. 20 minutes after school, 20 minutes in the evening. Outside those windows, apps stay closed.');
+    if (moodScore > 40) tips.push('Audit your feed. Spend 5 minutes unfollowing or muting 3 accounts that consistently make you feel compared, anxious, or inadequate. Then follow 3 accounts that teach you something.');
+    if (passive > 1) tips.push('Before opening any app, ask: what am I here for? A specific reason, even a small one, changes how your brain processes the time you spend there.');
+    if (morning > 1) tips.push('Try a "phone-free first 30 minutes" in the morning. What you consume first shapes your mental state for hours. Starting with intention instead of a feed is one of the highest-leverage changes you can make.');
+
+    // Always include at least 3 tips
+    const allTips = [
+      'Track your screen time honestly for one week using your phone\'s built-in tool. Awareness alone often changes behavior.',
+      'Replace one passive scroll session per day with something that produces something: a drawing, a workout, a conversation, a journal entry.',
+      'Talk to someone you trust about how your phone use makes you feel. Naming it out loud makes it more real and easier to change.'
+    ];
+    while (tips.length < 3) tips.push(allTips[tips.length]);
+
+    // Render results
+    document.getElementById('res-level').textContent = level;
+    document.getElementById('res-level').style.color = levelColor;
+    document.getElementById('res-score-line').textContent = scoreLine;
+
+    setTimeout(() => {
+      document.getElementById('bar-addiction').style.width = depScore + '%';
+      document.getElementById('bar-sleep').style.width = sleepScore + '%';
+      document.getElementById('bar-focus').style.width = focusScore + '%';
+      document.getElementById('bar-mood').style.width = moodScore + '%';
+    }, 100);
+
+    // Bar colors by severity
+    const bars = [
+      { id: 'bar-addiction', score: depScore },
+      { id: 'bar-sleep', score: sleepScore },
+      { id: 'bar-focus', score: focusScore },
+      { id: 'bar-mood', score: moodScore }
+    ];
+    bars.forEach(b => {
+      const el = document.getElementById(b.id);
+      if (b.score <= 33) el.style.background = '#2d7a47';
+      else if (b.score <= 66) el.style.background = '#d97706';
+      else el.style.background = '#c2410c';
+    });
+
+    document.getElementById('text-addiction').textContent = depText;
+    document.getElementById('text-sleep').textContent = sleepText;
+    document.getElementById('text-focus').textContent = focusText;
+    document.getElementById('text-mood').textContent = moodText;
+
+    const tipList = document.getElementById('res-tips');
+    tipList.innerHTML = '';
+    tips.slice(0, 4).forEach(t => {
+      const li = document.createElement('li');
+      li.textContent = t;
+      tipList.appendChild(li);
+    });
+
+    document.getElementById('quiz-form').style.display = 'none';
+    document.getElementById('quiz-results').style.display = 'block';
+    document.getElementById('quiz-results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function retakeQuiz() {
+    document.querySelectorAll('input[type="radio"]').forEach(r => r.checked = false);
+    document.getElementById('bar-addiction').style.width = '0%';
+    document.getElementById('bar-sleep').style.width = '0%';
+    document.getElementById('bar-focus').style.width = '0%';
+    document.getElementById('bar-mood').style.width = '0%';
+    document.getElementById('quiz-results').style.display = 'none';
+    document.getElementById('quiz-form').style.display = 'block';
+    document.getElementById('quiz-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   let ci = 0;
